@@ -1,17 +1,25 @@
 package com.example.EmployeeApi.dto;
 
+import com.example.EmployeeApi.model.Department;
 import com.example.EmployeeApi.model.Employee;
 
-public class EmployeeDto {
+import java.io.Serializable;
+
+public class EmployeeDto implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private Double salary;
-    private DepartmentDto departmentDto;
+    private Department department;
+
+    public EmployeeDto() {
+
+    }
 
     public EmployeeDto(Employee employee) {
         this.name = employee.getName();
         this.salary = employee.getSalary();
-        this.departmentDto = new DepartmentDto(employee.getDepartment());
+        this.department = employee.getDepartment();
     }
 
     public String getName() {
@@ -22,19 +30,19 @@ public class EmployeeDto {
         this.name = name;
     }
 
-    public DepartmentDto getDepartmentDto() {
-        return departmentDto;
-    }
-
-    public void setDepartmentDto(DepartmentDto departmentDto) {
-        this.departmentDto = departmentDto;
-    }
-
     public Double getSalary() {
         return salary;
     }
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

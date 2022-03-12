@@ -1,35 +1,30 @@
 package com.example.EmployeeApi.model;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "tb_departments")
 public class Department implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotEmpty(message = "Preenchimento obrigatório")
-    @Length(min = 2, max = 180, message = "Deve ter entre 2 e 180 caracteres.")
-    private String name;
+    private String departmentName;
 
     @OneToMany(mappedBy = "department")
-    private List<Employee> employees = new ArrayList<>();
+    private List<Employee> employees;
 
     public Department() {
 
     }
 
-    public Department(String name) {
-        this.name = name;
+    public Department(Long id, String departmentName) {
+        this.id = id;
+        this.departmentName = departmentName;
     }
 
     public Long getId() {
@@ -40,12 +35,12 @@ public class Department implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public List<Employee> getEmployees() {
@@ -61,11 +56,11 @@ public class Department implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(employees, that.employees);
+        return Objects.equals(id, that.id) && Objects.equals(departmentName, that.departmentName) && Objects.equals(employees, that.employees);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, employees);
+        return Objects.hash(id, departmentName, employees);
     }
 }

@@ -1,39 +1,30 @@
 package com.example.EmployeeApi.model;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "tb_employees")
 public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotEmpty(message = "Preenchimento obrigatório")
-    @Length(min = 2, max = 180, message = "Deve ter entre 2 e 180 caracteres.")
     private String name;
-
-    @Min(value = 0)
     private Double salary;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "department_id")
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Department department;
 
     public Employee() {
 
     }
 
-    public Employee(String name, Double salary, Department department) {
+    public Employee(Long id, String name, Double salary, Department department) {
+        this.id = id;
         this.name = name;
         this.salary = salary;
         this.department = department;

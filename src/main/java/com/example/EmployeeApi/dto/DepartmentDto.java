@@ -1,21 +1,24 @@
 package com.example.EmployeeApi.dto;
 
-import com.example.EmployeeApi.model.Department;
-
 public class DepartmentDto {
 
-    private String name;
+    private String departmentName;
 
-    public DepartmentDto(Department department) {
-        this.name = department.getName();
+    public DepartmentDto() {
+
     }
 
-    public String getName() {
-        return name;
+    public DepartmentDto(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDepartmentName() {
+        return departmentName;
     }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
 
 }
