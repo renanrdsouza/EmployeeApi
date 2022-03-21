@@ -1,9 +1,10 @@
 package com.example.EmployeeApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_departments")
@@ -16,7 +17,8 @@ public class Department implements Serializable {
     private String departmentName;
 
     @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
+    @JsonIgnore
+    private List<Employee> employees = new ArrayList<>();
 
     public Department() {
 

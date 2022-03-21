@@ -1,8 +1,11 @@
 package com.example.EmployeeApi.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "tb_employees")
@@ -16,15 +19,14 @@ public class Employee implements Serializable {
     private Double salary;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "department_id")
     private Department department;
 
     public Employee() {
 
     }
 
-    public Employee(Long id, String name, Double salary, Department department) {
-        this.id = id;
+    public Employee(String name, Double salary, Department department) {
         this.name = name;
         this.salary = salary;
         this.department = department;
