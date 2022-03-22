@@ -34,13 +34,14 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Employee>> list(@RequestParam int page,
+    public ResponseEntity<Page<EmployeeDto>> list(@RequestParam int page,
                                                @RequestParam int size,
                                                @RequestParam String sort,
                                                @RequestParam String direcao) {
         Page<Employee> employees = employeeService.listAll(page, size, sort, direcao);
+        Page<EmployeeDto> employeeDtos = employees.map(EmployeeDto::new);
 
-        return ResponseEntity.ok().body(employeeService.listAll());
+        return ResponseEntity.ok().body(employeeDtos);
     }
 
     @PostMapping

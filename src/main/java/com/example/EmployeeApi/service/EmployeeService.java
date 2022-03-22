@@ -8,13 +8,13 @@ import com.example.EmployeeApi.repository.DepartmentRepository;
 import com.example.EmployeeApi.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -29,8 +29,10 @@ public class EmployeeService {
         return new EmployeeDto(employeeRepository.findById(id).get());
     }
 
-    public List<Employee> listAll() {
-        return employeeRepository.findAll();
+    public Page<Employee> listAll(int page, int size, String sort, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), sort);
+
+        return employeeRepository.findAll(pageRequest);
     }
 
     @Transactional
