@@ -34,11 +34,12 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<EmployeeDto>> list(@RequestParam int page,
-                                               @RequestParam int size,
-                                               @RequestParam String sort,
-                                               @RequestParam String direcao) {
-        Page<Employee> employees = employeeService.listAll(page, size, sort, direcao);
+    public ResponseEntity<Page<EmployeeDto>> list (@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                   @RequestParam(value = "size", defaultValue = "24") Integer size,
+                                                   @RequestParam(value = "sort", defaultValue = "id") String sort,
+                                                   @RequestParam(value = "direction", defaultValue = "ASC") String direction
+                                                   ){
+        Page<Employee> employees = employeeService.listAll(page, size, sort, direction);
         Page<EmployeeDto> employeeDtos = employees.map(EmployeeDto::new);
 
         return ResponseEntity.ok().body(employeeDtos);

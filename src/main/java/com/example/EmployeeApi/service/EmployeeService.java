@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -26,11 +25,11 @@ public class EmployeeService {
     private DepartmentRepository departmentRepository;
 
     public EmployeeDto detail(Long id) {
-        return new EmployeeDto(employeeRepository.findById(id).get());
+        return new EmployeeDto(employeeRepository.getById(id));
     }
 
-    public Page<Employee> listAll(int page, int size, String sort, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), sort);
+    public Page<Employee> listAll(Integer page, Integer size, String id, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), id);
 
         return employeeRepository.findAll(pageRequest);
     }
