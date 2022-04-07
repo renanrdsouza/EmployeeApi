@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public ResponseEntity<Department> insert(@RequestBody NewDepartmentDto NewDepartmentDto) {
+    public ResponseEntity<Department> insert(@RequestBody @Valid NewDepartmentDto NewDepartmentDto) {
         Department department = departmentService.fromDto(NewDepartmentDto);
 
         department = departmentService.insert(department);
@@ -45,7 +46,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DepartmentDto> update(@PathVariable Long id, @RequestBody NewDepartmentDto newDepartmentDto) {
+    public ResponseEntity<DepartmentDto> update(@PathVariable Long id, @RequestBody @Valid NewDepartmentDto newDepartmentDto) {
         return ResponseEntity.ok().body(departmentService.update(id, newDepartmentDto));
     }
 

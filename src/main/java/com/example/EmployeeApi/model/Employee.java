@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_employees")
+//@Table(name = "tb_employees")
 public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -72,5 +72,15 @@ public class Employee implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, salary, department);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", department=" + department +
+                '}';
     }
 }

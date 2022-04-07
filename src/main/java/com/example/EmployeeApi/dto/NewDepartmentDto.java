@@ -1,7 +1,10 @@
 package com.example.EmployeeApi.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class NewDepartmentDto {
 
+    @NotBlank(message = "Preenchimento obrigatório")
     private String departmentName;
 
     public NewDepartmentDto() {
